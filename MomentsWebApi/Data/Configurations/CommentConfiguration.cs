@@ -10,11 +10,6 @@ namespace MomentsWebApi.Data.Configurations
         {
             builder.HasKey(c => c.Id);
 
-            builder.HasOne(c => c.Moment)
-                .WithMany(m => m.Comments)
-                .HasForeignKey(c => c.Moment.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.Property(m => m.Text)
                 .IsRequired()
                 .HasMaxLength(250);
