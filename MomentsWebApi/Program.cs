@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using MomentsWebApi.Data;
+using MomentsWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ builder.Services.AddCors(options =>
 // Dependency Injection
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
+
+builder.Services.AddScoped<IUploadService, UploadService>();
 
 var app = builder.Build();
 

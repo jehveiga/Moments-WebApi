@@ -9,5 +9,10 @@
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; }
         public IEnumerable<Comment> Comments { get; set; } = [];
+
+        public void AddDateUpdate()
+        {
+            UpdatedAt = DateTime.Now;
+        }
     }
 }

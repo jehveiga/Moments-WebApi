@@ -34,5 +34,19 @@ namespace MomentsWebApi.Mappings
 
             return momentViewModel;
         }
+
+        public static ResponseMomentViewModel ConverterMomentParaResponseViewModel(this Moment moment)
+        {
+            var momentViewModel = new ResponseMomentViewModel
+            {
+                Id = moment.Id,
+                Title = moment.Title,
+                Description = moment.Description,
+                Image = moment.Image,
+                CreatedAt = moment.CreatedAt,
+            };
+
+            return momentViewModel;
+        }
     }
 }

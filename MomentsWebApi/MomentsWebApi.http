@@ -1,6 +1,6 @@
 @MomentsWebApi_HostAddress = http://localhost:5223
 
-GET {{MomentsWebApi_HostAddress}}/weatherforecast/
+GET {{MomentsWebApi_HostAddress}}/moments/
 Accept: application/json
 
 ###
