@@ -47,19 +47,26 @@ namespace MomentsWebApi.Controllers
                                               [FromServices] IUploadService uploadService,
                                               [FromForm] EditMomentViewModel createMoment)
         {
-            (RetornoStatusUploadArquivo statusRetorno, string statusMessage) =
-                await uploadService.ArquivoUploadAsync(createMoment.Image);
+            string nameImage = string.Empty;
 
-            if (statusRetorno == RetornoStatusUploadArquivo.Success)
+            if (createMoment.Image is not null && createMoment.Image.Length > 0)
             {
-                createMoment.NameImage = statusMessage;
+                (RetornoStatusUploadArquivo statusRetorno, string statusMessage) =
+                    await uploadService.ArquivoUploadAsync(createMoment.Image);
+
+                if (statusRetorno == RetornoStatusUploadArquivo.Success)
+                {
+                    nameImage = statusMessage ?? string.Empty;
+                }
+                else
+                {
+                    return BadRequest(statusMessage);
+                }
             }
-            else
-            {
-                return BadRequest(statusMessage);
-            }
+
 
             var moment = createMoment.ConverterViewModelParaMoment();
+            moment.Image = nameImage;
 
             await context.Moments.AddAsync(moment);
             await context.SaveChangesAsync();
@@ -72,23 +79,43 @@ namespace MomentsWebApi.Controllers
                 Data = responseMoment
             };
 
-            return Ok(response);
-            //return CreatedAtAction(nameof(GetByIdAsync), new { id = moment.Id }, response);
+            var location = Url.Action(nameof(GetByIdAsync), new { id = responseMoment.Id }) ?? $"/{responseMoment.Id}";
+            return Created(location, response);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Response<MomentViewModel>>> Put([FromServices] AppDbContext context,
+                                                                        [FromServices] IUploadService uploadService,
                                                                         [FromForm] EditMomentViewModel editmoment,
                                                                         int id)
         {
+
+
             var momentDb = await context.Moments.FindAsync(id);
 
             if (momentDb is null)
                 return NotFound();
 
+            string nameImage = string.Empty;
+
+            if (editmoment.Image is not null && editmoment.Image.Length > 0)
+            {
+                (RetornoStatusUploadArquivo statusRetorno, string statusMessage) =
+                    await uploadService.ArquivoUploadAsync(editmoment.Image);
+
+                if (statusRetorno == RetornoStatusUploadArquivo.Success)
+                {
+                    nameImage = statusMessage ?? string.Empty;
+                }
+                else
+                {
+                    return BadRequest(statusMessage);
+                }
+            }
+
             momentDb.Title = editmoment.Title;
             momentDb.Description = editmoment.Description;
-            momentDb.Image = editmoment.NameImage;
+            momentDb.Image = nameImage;
 
             momentDb.AddDateUpdate();
 

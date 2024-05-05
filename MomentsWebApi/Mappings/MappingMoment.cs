@@ -11,7 +11,6 @@ namespace MomentsWebApi.Mappings
             {
                 Title = createMoment.Title,
                 Description = createMoment.Description,
-                Image = createMoment.NameImage,
             };
         }
     }
