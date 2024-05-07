@@ -20,7 +20,13 @@ namespace MomentsWebApi.Controllers
 
             var momentsViewModel = moments.ConverterMomentsParaViewModel();
 
-            return Ok(momentsViewModel);
+            var resultsList = momentsViewModel.Select(momentViewModel => new Response<MomentViewModel>
+            {
+                Message = "",
+                Data = momentViewModel
+            });
+
+            return Ok(resultsList);
         }
 
         [HttpGet("{id:int}")]
