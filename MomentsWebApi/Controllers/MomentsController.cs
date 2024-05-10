@@ -14,17 +14,17 @@ namespace MomentsWebApi.Controllers
     public class MomentsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MomentViewModel>>> GetAsync([FromServices] AppDbContext context)
+        public async Task<ActionResult<Response<IEnumerable<MomentViewModel>>>> GetAsync([FromServices] AppDbContext context)
         {
             var moments = await context.Moments.ToListAsync();
 
             var momentsViewModel = moments.ConverterMomentsParaViewModel();
 
-            var resultsList = momentsViewModel.Select(momentViewModel => new Response<MomentViewModel>
+            var resultsList = new Response<IEnumerable<MomentViewModel>>
             {
                 Message = "",
-                Data = momentViewModel
-            });
+                Data = momentsViewModel
+            };
 
             return Ok(resultsList);
         }
@@ -95,8 +95,6 @@ namespace MomentsWebApi.Controllers
                                                                         [FromForm] EditMomentViewModel editmoment,
                                                                         int id)
         {
-
-
             var momentDb = await context.Moments.FindAsync(id);
 
             if (momentDb is null)
