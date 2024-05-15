@@ -43,6 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 // Adicionando o middleware de Cors no pipeline da requisição para ser aceito requisições do endereços registrados na politica do cors informado
 app.UseCors(MyAllowSpecificOrigins);

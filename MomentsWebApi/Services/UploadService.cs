@@ -5,10 +5,12 @@ namespace MomentsWebApi.Services
     public class UploadService : IUploadService
     {
         private readonly ILogger<UploadService> _logger;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public UploadService(ILogger<UploadService> logger)
+        public UploadService(ILogger<UploadService> logger, IWebHostEnvironment appEnvironment)
         {
             _logger = logger;
+            _appEnvironment = appEnvironment;
         }
 
         public async Task<(RetornoStatusUploadArquivo, string)> ArquivoUploadAsync(IFormFile arquivo)
@@ -25,7 +27,7 @@ namespace MomentsWebApi.Services
             }
 
             // Combina o caminho relativo da pasta 'wwwroot' com a pasta criada alvo que será salvo a imagem enviada
-            var diretorioUpload = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+            var diretorioUpload = Path.Combine(_appEnvironment.WebRootPath, "uploads");
 
             VerificaDiretorioArquivo(diretorioUpload);
 

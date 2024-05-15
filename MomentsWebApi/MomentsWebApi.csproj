@@ -20,4 +20,28 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\uploads\050d04ef-f019-4e82-82ec-2fa5ee8790bb.jpg" />
+    <None Include="wwwroot\uploads\134dd5ca-9880-4248-b7d1-7288003953d3.jpg" />
+    <None Include="wwwroot\uploads\3b81de11-62e9-48e5-a33b-1ebb375279f2.jpg" />
+    <None Include="wwwroot\uploads\4aef218a-c36e-486a-8ef5-ceaade21d4bf.jpg" />
+    <None Include="wwwroot\uploads\4ddadfa0-8a6b-4e9a-929a-6d21f57dd839.jpg" />
+    <None Include="wwwroot\uploads\5254a428-d90c-45b3-85ea-9bbbb29c1a4a.jpg" />
+    <None Include="wwwroot\uploads\5d4106ac-fbb2-4d48-94ea-74ed95456406.jpg" />
+    <None Include="wwwroot\uploads\67db339c-7c5f-43aa-8060-6fd2e7a5f3cd.jpg" />
+    <None Include="wwwroot\uploads\6aa58901-da26-4bb2-bc0b-156ef2091330.jpg" />
+    <None Include="wwwroot\uploads\83b3762e-aa2d-4265-974e-bd8290057a88.jpg" />
+    <None Include="wwwroot\uploads\8a985b62-91a7-4c2b-957d-16d34f22f488.jpg" />
+    <None Include="wwwroot\uploads\934526f0-672e-4278-88c5-35e1a90350de.jpg" />
+    <None Include="wwwroot\uploads\9f858e39-afc3-4870-80e7-6792013674d3.jpg" />
+    <None Include="wwwroot\uploads\a6f74f17-c7a2-4877-9ae2-646403ace22a.jpg" />
+    <None Include="wwwroot\uploads\cc9849f3-92fd-4b04-8219-71dde34b9eed.jpg" />
+    <None Include="wwwroot\uploads\d37a4694-3386-4586-9b79-c590af25c684.jpg" />
+    <None Include="wwwroot\uploads\d7b154e9-9747-45b7-be28-eaa987ade3f7.jpg" />
+    <None Include="wwwroot\uploads\e943ff75-bd33-4991-8031-0ea3bdef89aa.jpg" />
+    <None Include="wwwroot\uploads\e9c1b4ac-5356-44cd-9d15-47cbc04a3605.jpg" />
+    <None Include="wwwroot\uploads\ed07c136-ad3c-4f9d-b1fa-669e2273c444.jpg" />
+    <None Include="wwwroot\uploads\ef463ca5-8acc-4ccb-bc08-5d06d181e472.jpg" />
+  </ItemGroup>
+
 </Project>
