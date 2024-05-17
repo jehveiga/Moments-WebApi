@@ -81,7 +81,7 @@ namespace MomentsWebApi.Controllers
 
             var response = new Response<ResponseMomentViewModel>
             {
-                Message = "Momento criado com sucesso",
+                Message = "Momento criado com sucesso!",
                 Data = responseMoment
             };
 
@@ -93,7 +93,7 @@ namespace MomentsWebApi.Controllers
         public async Task<ActionResult<Response<MomentViewModel>>> Put([FromServices] AppDbContext context,
                                                                         [FromServices] IUploadService uploadService,
                                                                         [FromForm] EditMomentViewModel editmoment,
-                                                                        int id)
+                                                                        [FromRoute] int id)
         {
             var momentDb = await context.Moments.FindAsync(id);
 
@@ -110,6 +110,7 @@ namespace MomentsWebApi.Controllers
                 if (statusRetorno == RetornoStatusUploadArquivo.Success)
                 {
                     nameImage = statusMessage ?? string.Empty;
+                    momentDb.Image = nameImage;
                 }
                 else
                 {
@@ -119,7 +120,6 @@ namespace MomentsWebApi.Controllers
 
             momentDb.Title = editmoment.Title;
             momentDb.Description = editmoment.Description;
-            momentDb.Image = nameImage;
 
             momentDb.AddDateUpdate();
 
@@ -130,7 +130,29 @@ namespace MomentsWebApi.Controllers
 
             var response = new Response<MomentViewModel>
             {
-                Message = "Momento criado com sucesso",
+                Message = "Momento editado com sucesso!",
+                Data = responseMoment
+            };
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Remove([FromServices] AppDbContext context, [FromRoute] int id)
+        {
+            var momentDb = await context.Moments.FindAsync(id);
+
+            if (momentDb is null)
+                return NotFound();
+
+            context.Entry(momentDb).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+
+            var responseMoment = momentDb.ConverterMomentParaViewModel();
+
+            var response = new Response<MomentViewModel>
+            {
+                Message = "Momento excluído com sucesso!",
                 Data = responseMoment
             };
 

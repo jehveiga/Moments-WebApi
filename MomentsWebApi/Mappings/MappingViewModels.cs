@@ -27,10 +27,12 @@ namespace MomentsWebApi.Mappings
                 Id = moment.Id,
                 Title = moment.Title,
                 Description = moment.Description,
-                Image = moment.Image,
                 CreatedAt = moment.CreatedAt,
                 UpdatedAt = moment.UpdatedAt
             };
+
+            if (!string.IsNullOrEmpty(moment.Image))
+                momentViewModel.Image = moment.Image;
 
             return momentViewModel;
         }
