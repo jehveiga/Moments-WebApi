@@ -50,5 +50,18 @@ namespace MomentsWebApi.Mappings
 
             return momentViewModel;
         }
+
+        public static CommentViewModel ConverterCommentParaViewModel(this Comment comment)
+
+        {
+            return new CommentViewModel
+            {
+                id = comment.Id,
+                UserName = comment.UserName,
+                Text = comment.Text,
+                CreatedAt = comment.CreatedAt,
+                MomentId = comment.MomentId
+            };
+        }
     }
 }

@@ -8,7 +8,7 @@
         public string Image { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; }
-        public IEnumerable<Comment> Comments { get; set; } = [];
+        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
 
         public void AddDateUpdate()
         {
